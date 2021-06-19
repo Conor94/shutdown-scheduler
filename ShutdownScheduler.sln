@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShutdownSchedulerApplication", "ShutdownSchedulerApplication\ShutdownSchedulerApplication.csproj", "{3B16324D-7840-49F8-9DA8-6ECA767916F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShutdownService", "ShutdownService\ShutdownService.csproj", "{0780B952-D765-4F48-A491-757583C87FB4}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{D5FC07D1-BB3D-4DD5-870C-66E656F0374D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B16324D-7840-49F8-9DA8-6ECA767916F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B16324D-7840-49F8-9DA8-6ECA767916F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B16324D-7840-49F8-9DA8-6ECA767916F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B16324D-7840-49F8-9DA8-6ECA767916F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0780B952-D765-4F48-A491-757583C87FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0780B952-D765-4F48-A491-757583C87FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0780B952-D765-4F48-A491-757583C87FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0780B952-D765-4F48-A491-757583C87FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5FC07D1-BB3D-4DD5-870C-66E656F0374D}.Debug|Any CPU.ActiveCfg = Debug
+		{D5FC07D1-BB3D-4DD5-870C-66E656F0374D}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA365A48-2CC9-4954-A26A-BDADC163F3D6}
+	EndGlobalSection
+EndGlobal

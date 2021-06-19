@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="ShutdownSchedulerApplication.Views.ScheduleShutdownView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:ShutdownSchedulerApplication.ViewModels"
+    xmlns:views="clr-namespace:ShutdownSchedulerApplication.Views"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Width="481.819"
+    Height="52.755"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModels:ShutdownAtViewModel}">
+            <views:ShutdownAtView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ShutdownInViewModel}">
+            <views:ShutdownInView />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <ContentControl
+            x:Name="InputContentControl"
+            Width="171"
+            Margin="143,14,168,16"
+            Content="{Binding SelectedShutdownTypeViewModel, UpdateSourceTrigger=PropertyChanged}" />
+        <Label
+            Height="23"
+            Margin="23,14,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Shutdown:" />
+        <ComboBox
+            Width="38"
+            Height="23"
+            Margin="94,14,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding ShutdownTypes, Mode=OneTime}"
+            SelectedItem="{Binding SelectedShutdownType, UpdateSourceTrigger=PropertyChanged}" />
+        <Button
+            Margin="324,14,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding ScheduleShutdownCommand}"
+            Content="Schedule Shutdown"
+            Style="{StaticResource MainButton}"
+            ToolTip="Schedule a shutdown" />
+    </Grid>
+</UserControl>
