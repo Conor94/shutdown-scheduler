@@ -56,38 +56,37 @@ namespace ShutdownSchedulerApplication.ViewModels
             ShutdownInfo = shutdownInfo;
 
             UserInput = "";
-            AddValidator(nameof(UserInput), ValidateUserInput);
+            
+            AddValidator(nameof(UserInput), new DataErrorValidator<string>(ValidateUserInput));
         }
         #endregion
 
         #region Validator methods
-        public string ValidateUserInput(object property)
+        public bool ValidateUserInput(string userInput, out string errorMessage)
         {
-            if (property is string userInput)
+            bool isValid = false;
+
+            if (string.IsNullOrWhiteSpace(userInput))
             {
-                if (string.IsNullOrWhiteSpace(userInput))
-                {
-                    Error = "Must enter input.";
-                }
-                else if (!double.TryParse(userInput, out double timeInput))
-                {
-                    Error = "Invalid number.";
-                }
-                else if (timeInput <= 0)
-                { 
-                    Error = "Number must be greater than 0.";
-                }
-                else
-                {
-                    Error = "";
-                }
-                ShutdownInfo.ShutdownTime = CalculateShutdownTime(mUserInput);
-                return Error;
+                errorMessage = "Must enter input.";
+            }
+            else if (!double.TryParse(userInput, out double timeInput))
+            {
+                errorMessage = "Invalid number.";
+            }
+            else if (timeInput <= 0)
+            {
+                errorMessage = "Number must be greater than 0.";
             }
             else
             {
-                throw new ArgumentException($"Argument 'object {nameof(userInput)}' must be of type 'string'.");
+                errorMessage = "";
+                isValid = true;
             }
+
+            ShutdownInfo.ShutdownTime = CalculateShutdownTime(mUserInput);
+
+            return isValid;
         }
         #endregion
 

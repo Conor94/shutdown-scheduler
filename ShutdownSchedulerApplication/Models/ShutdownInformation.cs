@@ -30,32 +30,30 @@ namespace ShutdownSchedulerApplication.Models
         public ShutdownInformation() : base()
         {
             ShutdownTime = DateTime.Now.AddMinutes(30).ToString();
-            AddValidator(nameof(ShutdownTime), ValidateShutdownTime);
+            
+            AddValidator(nameof(ShutdownTime), new DataErrorValidator<string>(ValidateShutdownTime));
         }
         #endregion
 
-        public string ValidateShutdownTime(object parameter)
+        public bool ValidateShutdownTime(string userInput, out string errorMessage)
         {
-            if (parameter is string userInput)
+            bool isValid = false;
+
+            if (DateTime.TryParse(userInput, out DateTime shutdownTime) == false)
             {
-                if (DateTime.TryParse(userInput, out DateTime shutdownTime) == false)
-                {
-                    Error = "Invalid time format.";
-                }
-                else if (shutdownTime.RemoveSeconds() < DateTime.Now.RemoveSeconds())
-                {
-                    Error = "Shutdown time cannot be in the past.";
-                }
-                else
-                {
-                    Error = "";
-                }
-                return Error;
+                errorMessage = "Invalid time format.";
+            }
+            else if (shutdownTime.RemoveSeconds() < DateTime.Now.RemoveSeconds())
+            {
+                errorMessage = "Shutdown time cannot be in the past.";
             }
             else
             {
-                throw new ArgumentException($"Argument 'object {nameof(parameter)}' must be of type 'string'.");
+                errorMessage = "";
+                isValid = true;
             }
+
+            return isValid;
         }
 
         protected override void Dispose(bool disposing)

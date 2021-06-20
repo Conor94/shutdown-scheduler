@@ -107,7 +107,7 @@ namespace ShutdownSchedulerApplication.ViewModels
 
         private bool ScheduleShutdownCanExecute()
         {
-            return ShutdownInfo.ValidateShutdownTime(ShutdownInfo.ShutdownTime) == "";
+            return ShutdownInfo.ValidateShutdownTime(ShutdownInfo.ShutdownTime, out string _);
         }
         #endregion
     }
