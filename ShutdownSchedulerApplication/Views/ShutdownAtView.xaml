@@ -8,14 +8,10 @@
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <Style x:Key="DateTimePickerStyle" TargetType="xctk:DateTimePicker">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
-                    <Setter Property="ToolTip" Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <Style
+            x:Key="DateTimePickerStyle"
+            BasedOn="{StaticResource InputErrorBase}"
+            TargetType="xctk:DateTimePicker" />
     </UserControl.Resources>
 
     <Grid>
