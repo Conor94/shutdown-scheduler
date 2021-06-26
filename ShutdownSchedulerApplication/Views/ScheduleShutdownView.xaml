@@ -45,6 +45,7 @@
             VerticalAlignment="Top"
             Command="{Binding ScheduleShutdownCommand}"
             Content="Schedule Shutdown"
+            IsDefault="True"
             Style="{StaticResource MainButton}"
             ToolTip="Schedule a shutdown" />
     </Grid>

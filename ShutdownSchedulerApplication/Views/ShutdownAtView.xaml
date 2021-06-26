@@ -14,8 +14,9 @@
             TargetType="xctk:DateTimePicker" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=UserInputBox}">
         <xctk:DateTimePicker
+            Name="UserInputBox"
             Width="171"
             Height="23"
             HorizontalAlignment="Left"

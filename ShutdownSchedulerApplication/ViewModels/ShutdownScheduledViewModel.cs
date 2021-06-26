@@ -40,30 +40,35 @@ namespace ShutdownSchedulerApplication.ViewModels
         #region Command methods
         public void AbortShutdownExecute()
         {
-            try
+            // Ask if the user is sure they want to abort the scheduled shutdown
+            MessageBoxResult userResponse = MessageBox.Show("Are you sure you want to abort the scheduled shutdown?", "Abort scheduled shutdown", MessageBoxButton.YesNo);
+            if (userResponse == MessageBoxResult.Yes)
             {
-                // Change settings
-                AppConfigSection section = AppConfigManager<AppConfigSection>.GetSection();
-                section.IsShutdownScheduled = false;
-                section.ShutdownTime = DateTime.MinValue;
+                try
+                {
+                    // Change settings
+                    AppConfigSection section = AppConfigManager<AppConfigSection>.GetSection();
+                    section.IsShutdownScheduled = false;
+                    section.ShutdownTime = DateTime.MinValue;
 
-                // Stop the service
-                section.IsPlannedServiceStop = true;
-                AppConfigManager<AppConfigSection>.Save();
-                ServiceController service = new ServiceController("ShutdownSchedulerService");
-                service.Stop();
-                service.Dispose();
+                    // Stop the service
+                    section.IsPlannedServiceStop = true;
+                    AppConfigManager<AppConfigSection>.Save();
+                    ServiceController service = new ServiceController("ShutdownSchedulerService");
+                    service.Stop();
+                    service.Dispose();
 
-                InvokeViewChangeRequest();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error occurred when attempting to abort the scheduled shutdown. This has likely occurred because the " +
-                                "service used to shutdown the system was stopped while this program was running.\n\n" +
-                                "Restart the program to fix the error. If this does not work, the program must be reinstalled.\n\n" +
-                                "Exception information:" +
-                                $"Message: {e.Message}\n" +
-                                $"Stacktrace: {e.StackTrace}");
+                    InvokeViewChangeRequest();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error occurred when attempting to abort the scheduled shutdown. This has likely occurred because the " +
+                                    "service used to shutdown the system was stopped while this program was running.\n\n" +
+                                    "Restart the program to fix the error. If this does not work, the program must be reinstalled.\n\n" +
+                                    "Exception information:" +
+                                    $"Message: {e.Message}\n" +
+                                    $"Stacktrace: {e.StackTrace}");
+                }
             }
         }
         #endregion

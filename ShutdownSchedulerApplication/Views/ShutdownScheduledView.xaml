@@ -33,6 +33,7 @@
             VerticalAlignment="Top"
             Command="{Binding AbortShutdownCommand}"
             Content="Abort"
+            IsDefault="True"
             Style="{StaticResource MainButton}"
             ToolTip="Abort scheduled shutdown" />
     </Grid>

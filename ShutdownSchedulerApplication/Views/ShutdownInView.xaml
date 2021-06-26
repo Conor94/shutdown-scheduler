@@ -17,8 +17,9 @@
             <Setter Property="HorizontalContentAlignment" Value="Right" />
         </Style>
     </UserControl.Resources>
-    <Grid Width="171">
+    <Grid Width="171" FocusManager.FocusedElement="{Binding ElementName=UserInputBox}">
         <TextBox
+            Name="UserInputBox"
             Width="82"
             Height="23"
             HorizontalAlignment="Left"
