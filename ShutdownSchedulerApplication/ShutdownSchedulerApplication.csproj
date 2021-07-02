@@ -107,6 +107,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\AppConfigSection.cs" />
     <Compile Include="Enum\ShutdownType.cs" />
+    <Compile Include="Enum\TimeFormat.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ScheduleShutdownViewModel.cs" />
     <Compile Include="ViewModels\ShutdownAtViewModel.cs" />

@@ -1,7 +1,10 @@
 ﻿using MvvmBase.Bindable;
 using Prism.Events;
+using ShutdownSchedulerApplication.Enums;
 using ShutdownSchedulerApplication.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ShutdownSchedulerApplication.ViewModels
 {
@@ -10,8 +13,7 @@ namespace ShutdownSchedulerApplication.ViewModels
         #region Fields and properties
         private ShutdownInformation mShutdownInfo;
         private string mUserInput;
-        private string mSelectedTimeFormat;
-        private string[] mTimeFormats;
+        private TimeFormat mSelectedTimeFormat;
 
         public ShutdownInformation ShutdownInfo
         {
@@ -26,27 +28,18 @@ namespace ShutdownSchedulerApplication.ViewModels
                 SetProperty(ref mUserInput, value);
             }
         }
-        public string SelectedTimeFormat
+        public TimeFormat SelectedTimeFormat
         {
             get => mSelectedTimeFormat;
             set
             {
                 SetProperty(ref mSelectedTimeFormat, value);
-                ShutdownInfo.ShutdownTime = CalculateShutdownTime(mUserInput);
+                ShutdownInfo.ShutdownTime = CalculateShutdownTime(mUserInput); // Recalculate the shutdown time because the format has changed
             }
         }
-        public string[] TimeFormats
+        public IEnumerable<TimeFormat> TimeFormats
         {
-            get
-            {
-                if (mTimeFormats == null)
-                {
-                    mTimeFormats = new string[] { "minutes", "hours" };
-                    SelectedTimeFormat = mTimeFormats[0];
-                }
-                return mTimeFormats;
-            }
-            private set => mTimeFormats = value;
+            get => Enum.GetValues(typeof(TimeFormat)).Cast<TimeFormat>();
         }
         #endregion
 
@@ -56,7 +49,9 @@ namespace ShutdownSchedulerApplication.ViewModels
             ShutdownInfo = shutdownInfo;
 
             UserInput = "";
-            
+
+            SelectedTimeFormat = TimeFormat.minutes;
+
             AddValidator(nameof(UserInput), new DataErrorValidator<string>(ValidateUserInput));
         }
         #endregion
@@ -74,8 +69,8 @@ namespace ShutdownSchedulerApplication.ViewModels
             {
                 errorMessage = "Invalid shutdown time.";
             }
-            else if ((SelectedTimeFormat == "hours" && timeInput * 60 < ShutdownInformation.MinimumShutdownTimeInMinutes) ||
-                     (SelectedTimeFormat == "minutes" && timeInput < ShutdownInformation.MinimumShutdownTimeInMinutes))
+            else if ((SelectedTimeFormat == TimeFormat.hours && timeInput * 60 < ShutdownInformation.MinimumShutdownTimeInMinutes) ||
+                     (SelectedTimeFormat == TimeFormat.minutes && timeInput < ShutdownInformation.MinimumShutdownTimeInMinutes))
             {
                 errorMessage = $"Shutdown time cannot be less than {ShutdownInformation.MinimumShutdownTimeInMinutes} {(ShutdownInformation.MinimumShutdownTimeInMinutes < 10 ? "minute" : "minutes")}.";
             }
@@ -95,15 +90,15 @@ namespace ShutdownSchedulerApplication.ViewModels
         public string CalculateShutdownTime(string userInput)
         {
             DateTime? shutdownTime = null;
-            if (string.IsNullOrEmpty(Error) && !string.IsNullOrEmpty(userInput) && userInput != "." && SelectedTimeFormat != null)
+            if (string.IsNullOrEmpty(Error) && !string.IsNullOrEmpty(userInput) && userInput != ".")
             {
                 double timeInput = double.Parse(userInput);
                 DateTime currentTime = DateTime.Now;
-                if (SelectedTimeFormat == "minutes")
+                if (SelectedTimeFormat == TimeFormat.minutes)
                 {
                     shutdownTime = currentTime.AddMinutes(timeInput);
                 }
-                else if (SelectedTimeFormat == "hours")
+                else if (SelectedTimeFormat == TimeFormat.hours)
                 {
                     shutdownTime = currentTime.AddHours(timeInput);
                 }
