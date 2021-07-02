@@ -1,10 +1,10 @@
 ﻿using AppConfigurationManager;
+using MvvmBase.Bindable;
 using Prism.Commands;
 using Prism.Events;
-using MvvmBase.Bindable;
+using ShutdownSchedulerApplication.Configuration;
 using ShutdownSchedulerApplication.Enums;
 using ShutdownSchedulerApplication.Models;
-using ShutdownSchedulerApplication.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

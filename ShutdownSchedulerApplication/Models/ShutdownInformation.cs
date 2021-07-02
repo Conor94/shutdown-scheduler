@@ -30,7 +30,7 @@ namespace ShutdownSchedulerApplication.Models
         public ShutdownInformation() : base()
         {
             ShutdownTime = DateTime.Now.AddMinutes(30).ToString();
-            
+
             AddValidator(nameof(ShutdownTime), new DataErrorValidator<string>(ValidateShutdownTime));
         }
         #endregion

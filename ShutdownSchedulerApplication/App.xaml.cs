@@ -2,12 +2,12 @@
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Unity;
-using ShutdownSchedulerApplication.Models;
 using ShutdownSchedulerApplication.Configuration;
+using ShutdownSchedulerApplication.Models;
+using ShutdownSchedulerApplication.Views;
 using System;
 using System.Reflection;
 using System.Windows;
-using ShutdownSchedulerApplication.Views;
 
 namespace ShutdownSchedulerApplication
 {
