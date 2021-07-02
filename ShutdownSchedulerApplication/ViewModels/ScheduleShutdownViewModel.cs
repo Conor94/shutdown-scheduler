@@ -107,7 +107,18 @@ namespace ShutdownSchedulerApplication.ViewModels
 
         private bool ScheduleShutdownCanExecute()
         {
-            return ShutdownInfo.ValidateShutdownTime(ShutdownInfo.ShutdownTime, out string _);
+            if (SelectedShutdownTypeViewModel is ShutdownAtViewModel)
+            {
+                return ShutdownInfo.ValidateShutdownTime(ShutdownInfo.ShutdownTime, out string _);
+            }
+            else if (SelectedShutdownTypeViewModel is ShutdownInViewModel vm)
+            {
+                return vm.ValidateUserInput(vm.UserInput, out string _);
+            }
+            else
+            {
+                throw new Exception($"'{nameof(SelectedShutdownTypeViewModel)}' is not a valid view model. It must be a {nameof(ShutdownAtViewModel)} or {nameof(ShutdownInViewModel)}.");
+            }
         }
         #endregion
     }

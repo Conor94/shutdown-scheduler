@@ -72,11 +72,12 @@ namespace ShutdownSchedulerApplication.ViewModels
             }
             else if (!double.TryParse(userInput, out double timeInput))
             {
-                errorMessage = "Invalid number.";
+                errorMessage = "Invalid shutdown time.";
             }
-            else if (timeInput <= 0)
+            else if ((SelectedTimeFormat == "hours" && timeInput * 60 < ShutdownInformation.MinimumShutdownTimeInMinutes) ||
+                     (SelectedTimeFormat == "minutes" && timeInput < ShutdownInformation.MinimumShutdownTimeInMinutes))
             {
-                errorMessage = "Number must be greater than 0.";
+                errorMessage = $"Shutdown time cannot be less than {ShutdownInformation.MinimumShutdownTimeInMinutes} {(ShutdownInformation.MinimumShutdownTimeInMinutes < 10 ? "minute" : "minutes")}.";
             }
             else
             {
@@ -94,7 +95,7 @@ namespace ShutdownSchedulerApplication.ViewModels
         public string CalculateShutdownTime(string userInput)
         {
             DateTime? shutdownTime = null;
-            if (string.IsNullOrEmpty(Error) && !string.IsNullOrEmpty(userInput) && SelectedTimeFormat != null)
+            if (string.IsNullOrEmpty(Error) && !string.IsNullOrEmpty(userInput) && userInput != "." && SelectedTimeFormat != null)
             {
                 double timeInput = double.Parse(userInput);
                 DateTime currentTime = DateTime.Now;

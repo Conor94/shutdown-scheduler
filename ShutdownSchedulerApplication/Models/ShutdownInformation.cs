@@ -7,6 +7,8 @@ namespace ShutdownSchedulerApplication.Models
 {
     public class ShutdownInformation : ModelBase
     {
+        public const int MinimumShutdownTimeInMinutes = 1;
+
         #region Fields
         private string mShutdownTime;
         #endregion
@@ -43,9 +45,9 @@ namespace ShutdownSchedulerApplication.Models
             {
                 errorMessage = "Invalid time format.";
             }
-            else if (shutdownTime.RemoveSeconds() < DateTime.Now.RemoveSeconds())
+            else if ((shutdownTime.RemoveSeconds() - DateTime.Now.RemoveSeconds()).TotalMinutes < MinimumShutdownTimeInMinutes)
             {
-                errorMessage = "Shutdown time cannot be in the past.";
+                errorMessage = $"Shutdown time cannot be less than {MinimumShutdownTimeInMinutes} {(MinimumShutdownTimeInMinutes < 10 ? "minute" : "minutes")}.";
             }
             else
             {

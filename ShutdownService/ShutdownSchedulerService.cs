@@ -198,7 +198,7 @@ namespace ShutdownService
         {
             try
             {
-                ShutdownTimer.Stop();
+                ShutdownTimer?.Stop();
 
                 AppConfigSection section = AppConfigManager<AppConfigSection>.GetSection();
                 // If the service is stopped before the shutdown timer elapses, log a message saying the shutdown was cancelled
