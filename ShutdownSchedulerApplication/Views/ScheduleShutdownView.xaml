@@ -46,7 +46,7 @@
             Command="{Binding ScheduleShutdownCommand}"
             Content="Schedule Shutdown"
             IsDefault="True"
-            Style="{StaticResource MainButton}"
+            Style="{StaticResource RoundedButton}"
             ToolTip="Schedule a shutdown" />
     </Grid>
 </UserControl>

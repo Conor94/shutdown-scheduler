@@ -34,7 +34,7 @@
             Command="{Binding AbortShutdownCommand}"
             Content="Abort"
             IsDefault="True"
-            Style="{StaticResource MainButton}"
+            Style="{StaticResource RoundedButton}"
             ToolTip="Abort scheduled shutdown" />
     </Grid>
 </UserControl>

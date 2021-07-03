@@ -20,7 +20,7 @@
         </DataTemplate>
 
         <!--  Styles  -->
-        <Style x:Key="MainButton" TargetType="Button">
+        <Style x:Key="RoundedButton" TargetType="Button">
             <Setter Property="Width" Value="136" />
             <Setter Property="Height" Value="23" />
             <Setter Property="BorderThickness" Value="0" />
@@ -44,7 +44,11 @@
                                 <Setter Property="Foreground" Value="White" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#7F0078D7" />
+                                <Setter Property="Background" Value="#A50078D7" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseCaptured" Value="True">
+                                <Setter Property="Background" Value="#CC0078D7" />
                                 <Setter Property="Foreground" Value="White" />
                             </Trigger>
                         </ControlTemplate.Triggers>
