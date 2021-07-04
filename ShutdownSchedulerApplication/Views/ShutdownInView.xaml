@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:ShutdownSchedulerApplication.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Height="75.5"
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:ShutdownInTimeConverter x:Key="ShutdownInTimeConverterInstance" />
@@ -37,5 +38,18 @@
             VerticalAlignment="Top"
             ItemsSource="{Binding TimeFormats, Mode=OneTime}"
             SelectedItem="{Binding SelectedTimeFormat, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBox
+            Width="171"
+            Height="48"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Background="{StaticResource BackgroundColor}"
+            BorderThickness="0"
+            Foreground="Red"
+            IsReadOnly="True"
+            Text="{Binding Tag, ElementName=UserInputBox}"
+            TextWrapping="Wrap"
+            Visibility="{Binding ErrorTextBoxVisibility}" />
     </Grid>
 </UserControl>

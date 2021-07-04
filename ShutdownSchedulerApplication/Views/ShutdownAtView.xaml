@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:ShutdownSchedulerApplication.Views"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Height="75.5"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style
@@ -25,5 +26,18 @@
             FormatString="{StaticResource DateTimeFormat}"
             Style="{StaticResource DateTimePickerStyle}"
             Text="{Binding ShutdownInfo.ShutdownTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+        <TextBox
+            Width="171"
+            Height="48"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Background="{StaticResource BackgroundColor}"
+            BorderThickness="0"
+            Foreground="Red"
+            IsReadOnly="True"
+            Text="{Binding Tag, ElementName=UserInputBox}"
+            TextWrapping="Wrap"
+            Visibility="{Binding ShutdownInfo.ErrorTextBoxVisibility}" />
     </Grid>
 </UserControl>

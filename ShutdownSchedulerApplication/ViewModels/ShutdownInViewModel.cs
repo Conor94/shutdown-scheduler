@@ -5,6 +5,7 @@ using ShutdownSchedulerApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace ShutdownSchedulerApplication.ViewModels
 {
@@ -14,6 +15,7 @@ namespace ShutdownSchedulerApplication.ViewModels
         private ShutdownInformation mShutdownInfo;
         private string mUserInput;
         private TimeFormat mSelectedTimeFormat;
+        private Visibility mErrorTextBoxVisibility;
 
         public ShutdownInformation ShutdownInfo
         {
@@ -41,6 +43,11 @@ namespace ShutdownSchedulerApplication.ViewModels
         {
             get => Enum.GetValues(typeof(TimeFormat)).Cast<TimeFormat>();
         }
+        public Visibility ErrorTextBoxVisibility
+        {
+            get => mErrorTextBoxVisibility;
+            set => SetProperty(ref mErrorTextBoxVisibility, value);
+        }
         #endregion
 
         #region Constructors
@@ -64,15 +71,20 @@ namespace ShutdownSchedulerApplication.ViewModels
             if (string.IsNullOrWhiteSpace(userInput))
             {
                 errorMessage = "Must enter input.";
+
+                ErrorTextBoxVisibility = Visibility.Hidden;
             }
             else if (!double.TryParse(userInput, out double timeInput))
             {
                 errorMessage = "Invalid shutdown time.";
+
+                ErrorTextBoxVisibility = Visibility.Visible;
             }
             else if ((SelectedTimeFormat == TimeFormat.hours && timeInput * 60 < ShutdownInformation.MinimumShutdownTimeInMinutes) ||
                      (SelectedTimeFormat == TimeFormat.minutes && timeInput < ShutdownInformation.MinimumShutdownTimeInMinutes))
             {
                 errorMessage = $"Shutdown time cannot be less than {ShutdownInformation.MinimumShutdownTimeInMinutes} {(ShutdownInformation.MinimumShutdownTimeInMinutes < 10 ? "minute" : "minutes")}.";
+                ErrorTextBoxVisibility = Visibility.Visible;
             }
             else
             {

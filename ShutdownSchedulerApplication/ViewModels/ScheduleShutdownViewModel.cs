@@ -22,6 +22,7 @@ namespace ShutdownSchedulerApplication.ViewModels
         private ShutdownInformation mShutdownInfo;
         private ViewModelBase mSelectedShutdownTypeViewModel;
         private ShutdownType mSelectedShutdownType;
+        private Visibility mErrorTextBoxVisibility;
 
         public ShutdownInformation ShutdownInfo
         {
@@ -59,6 +60,11 @@ namespace ShutdownSchedulerApplication.ViewModels
         public IEnumerable<ShutdownType> ShutdownTypes
         {
             get => Enum.GetValues(typeof(ShutdownType)).Cast<ShutdownType>();
+        }
+        public Visibility ErrorTextBoxVisibility
+        {
+            get => mErrorTextBoxVisibility;
+            set => SetProperty(ref mErrorTextBoxVisibility, value);
         }
         #endregion
 

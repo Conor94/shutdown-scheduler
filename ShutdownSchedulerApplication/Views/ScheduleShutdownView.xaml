@@ -8,7 +8,7 @@
     xmlns:views="clr-namespace:ShutdownSchedulerApplication.Views"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Width="481.819"
-    Height="52.755"
+    Height="96.755"
     mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModels:ShutdownAtViewModel}">
@@ -23,7 +23,7 @@
         <ContentControl
             x:Name="InputContentControl"
             Width="171"
-            Margin="143,14,168,16"
+            Margin="144,10,167,4"
             Content="{Binding SelectedShutdownTypeViewModel, UpdateSourceTrigger=PropertyChanged}" />
         <Label
             Height="23"

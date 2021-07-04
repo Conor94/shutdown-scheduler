@@ -11,6 +11,7 @@ namespace ShutdownSchedulerApplication.Models
 
         #region Fields
         private string mShutdownTime;
+        private Visibility mErrorTextBoxVisibility;
         #endregion
 
         #region Properties
@@ -25,6 +26,11 @@ namespace ShutdownSchedulerApplication.Models
                 }
                 SetProperty(ref mShutdownTime, value);
             }
+        }
+        public Visibility ErrorTextBoxVisibility
+        {
+            get => mErrorTextBoxVisibility;
+            set => SetProperty(ref mErrorTextBoxVisibility, value);
         }
         #endregion
 
@@ -44,10 +50,14 @@ namespace ShutdownSchedulerApplication.Models
             if (DateTime.TryParse(userInput, out DateTime shutdownTime) == false)
             {
                 errorMessage = "Invalid time format.";
+
+                ErrorTextBoxVisibility = Visibility.Visible;
             }
             else if ((shutdownTime.RemoveSeconds() - DateTime.Now.RemoveSeconds()).TotalMinutes < MinimumShutdownTimeInMinutes)
             {
                 errorMessage = $"Shutdown time cannot be less than {MinimumShutdownTimeInMinutes} {(MinimumShutdownTimeInMinutes < 10 ? "minute" : "minutes")}.";
+
+                ErrorTextBoxVisibility = Visibility.Visible;
             }
             else
             {
