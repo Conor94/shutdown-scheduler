@@ -1,6 +1,6 @@
 # Shutdown Scheduler
 WPF application used for scheduling shutdowns of Windows systems. The program uses a Windows Service (https://docs.microsoft.com/en-us/dotnet/framework/windows-services/) to
-shutdown the system so that the program does not have to remain running on the users machine.
+shutdown the system so that the program does not have to remain running on the user's machine.
 
 There are two shutdown modes: shutdown in, and shutdown at. 
 
