@@ -1,4 +1,4 @@
-﻿using MvvmBase.Bindable;
+﻿using PrismMvvmBase.Bindable;
 using ShutdownSchedulerApplication.Extensions;
 using System;
 using System.Windows;

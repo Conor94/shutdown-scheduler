@@ -1,5 +1,5 @@
-﻿using MvvmBase.Bindable;
-using Prism.Events;
+﻿using Prism.Events;
+using PrismMvvmBase.Bindable;
 using ShutdownSchedulerApplication.Models;
 
 namespace ShutdownSchedulerApplication.ViewModels
